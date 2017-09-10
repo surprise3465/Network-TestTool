@@ -94,9 +94,9 @@ namespace PingTestTool
                 // Calculating avg if not yet calculated
                 if (avg == null && results.Count(res => res.Status == PingResultEntryStatus.Success) > 0)
                 {
-                    avg = new double?(0);
+                    avg = 0;
                     int cont = 0;
-                    foreach (PingResultEntry e in results.Where(x => x.Status == PingResultEntryStatus.Success))
+                    foreach (var e in results.Where(x => x.Status == PingResultEntryStatus.Success))
                     {
                         cont++;
                         avg += e.Rtt;
@@ -203,11 +203,11 @@ namespace PingTestTool
                 thread = new Thread[deviceList.Count];
                 for (var i = 0; i < deviceList.Count; i++)
                 {
-                    thread[i] = new Thread(Threadhandler);
+                    thread[i] = new Thread(Threadhandler) {IsBackground = true};
                     thread[i].Start(i);
                 }
 
-                wait= new Thread(waitforallthread);
+                wait= new Thread(waitforallthread) { IsBackground = true };
                 wait.Start();
             }
         }
@@ -215,13 +215,13 @@ namespace PingTestTool
         private void waitforallthread()
         {
             bool flag = true;
-            Thread.Sleep(2000);
+            Thread.Sleep(200);
             while (flag)
             {
                 flag = false;
                 foreach (var thr in thread.Where(thr => thr.IsAlive))
                 {
-                    Thread.Sleep(200);
+                    Thread.Sleep(2000);
                     flag = true;
                 }
             }
