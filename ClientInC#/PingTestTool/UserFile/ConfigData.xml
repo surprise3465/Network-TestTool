@@ -3,7 +3,7 @@
 <Root>
 	<Project name="XXXX">
 		<DeviceList>
-			<Device name="S0" ip="192.168.1.101"></Device>
+			<Device name="S0" ip="192.168.1.100"></Device>
 			<Device name="S1" ip="172.16.0.25"></Device>
 			<Device name="S2" ip="172.16.0.35"></Device>
 			<Device name="S3" ip="172.16.0.45"></Device>
